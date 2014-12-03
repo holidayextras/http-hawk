@@ -49,7 +49,7 @@
 			
 			// Make sure we have the required properties
 			if( !isset( $this->_server ) ) {
-				throw new Exception( "Server required" );
+				throw new Exception( 'Server required' );
 			}
 
 		}
@@ -75,7 +75,7 @@
 			if( isset( $this->_auth ) ) {
 			
 				// make sure we are using UTC for all requests or the auth wont pass
-				date_default_timezone_set('UTC');
+				date_default_timezone_set( 'UTC' );
 				// try with our server time for the first request
 				$hawkTime = time();
 
@@ -114,18 +114,18 @@
 			curl_close( $ch );
 
 			$result = array(
-				"header" => null,
-				"body" => null
+				'header' => null,
+				'body' => null
 			);
 			
 			// split out the header and the body
-			list( $result['header'], $result['body'] ) = explode( "\r\n\r\n", $reply, 2 );
+			list( $result[ 'header' ], $result[ 'body' ] ) = explode( "\r\n\r\n", $reply, 2 );
 
 			// Parse header
-			$result['header'] = $this->parseHeader( $result['header'] );
+			$result[ 'header' ] = $this->parseHeader( $result[ 'header' ] );
 			
 			// Parse body
-			$result['body'] = $this->parseBody( $result['body'] );
+			$result[ 'body' ] = $this->parseBody( $result[ 'body' ] );
 
 			return $result;
 			
