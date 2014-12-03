@@ -3,7 +3,6 @@
 	/**
 	* Http Hawk Request class
 	* @description Make a http request with optional HAWK authentication.
-	* @author Rob Huzzey<robert.huzzey@holidayextras.com>
 	**/
 
 	class HttpHawk {
@@ -93,16 +92,14 @@
 				
 				curl_setopt( $ch, CURLOPT_HTTPHEADER, array( 'x-identifier: ' . md5( $hawkTime ) ) );
 				curl_setopt( $ch, CURLOPT_HTTPHEADER, array( 'Authorization: ' . $hawk ) ); // hawks authentication
-			}
+			}		
 
-			if ( $method === 'POST' ) {
-				curl_setopt( $ch, CURLOPT_POST, true );
-				curl_setopt( $ch, CURLOPT_POSTFIELDS, $data );
-			} else if ( $method === 'PUT' ) {
-				curl_setopt( $ch, CURLOPT_CUSTOMREQUEST, 'PUT' );
-				curl_setopt( $ch, CURLOPT_POSTFIELDS, $data );
-			} else if ( $method === 'PATCH' ) {
-				curl_setopt( $ch, CURLOPT_CUSTOMREQUEST, 'PATCH' );
+			if( $method === 'PUT' || $method === 'PATCH' || $method === 'POST' ) {
+				if ( $method === 'POST' ) {
+					curl_setopt( $ch, CURLOPT_POST, true );
+				} else {
+					curl_setopt( $ch, CURLOPT_CUSTOMREQUEST, $method );
+				}
 				curl_setopt( $ch, CURLOPT_POSTFIELDS, $data );
 			}
 
