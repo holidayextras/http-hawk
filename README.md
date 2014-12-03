@@ -1,4 +1,4 @@
-Hawk Http
+Http HAWK
 ===
 A HTTP Connector with optional [HAWK authentication](https://github.com/hueniverse/hawk).
 
